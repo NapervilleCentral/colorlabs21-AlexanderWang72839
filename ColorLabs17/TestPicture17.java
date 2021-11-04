@@ -27,14 +27,16 @@ public class TestPicture17
      //opens a pictue using a path
      //Picture apic = new Picture("C:\\Users\\khayes\\Favorites\\Documents\APCS- Java\chap03\Curriclum 2013\Picture Color labs\images\\beach.jpg");
      
-     //relative path
+     //picture loads all of the pixels into a n array uses a relative path
      Picture apic = new Picture("images\\beach.jpg");
      Picture ferris1 = new Picture("images/2000 ferris wheel2.jpg");
      Picture ferris2 = new Picture("images/2000 ferris wheel2.jpg");
      Picture ferris3 = new Picture("images/2000 ferris wheel2.jpg");
+     Picture somepic = new Picture("images/robot.jpg");
 
      //apic.explore();
      ferris1.explore();
+     somepic.explore();
      
      //makes an array of pixels
      Pixel[] pixels;
@@ -48,23 +50,29 @@ public class TestPicture17
     /**/
         //access each index
     System.out.println(pixels[17]);
-    //access each pixel
+    //access each pixel by -- Picture.getPixel(x,y);
     Pixel spot = ferris1.getPixel(100,100);
     
-    System.out.println(pixels[17].getColor());
-    System.out.println(spot);
+    spot.setColor(new Color (171, 205, 239));
+    System.out.println("spot" + spot);
+    ferris1.explore();
 /*
     pixels[17].setColor(Color.blue);
     spot.setColor(new Color(252,252,252));
     pixels[500034].setColor(Color.blue);
 
     ferris1.explore();
-/*
+/**/
    // loop to access indexes of array or collection
 
     //for each loop spot  is a ?
-    for (Pixel spot : pixels)
-    System.out.println( spot );
+    for (Pixel spot3 : pixels) {
+        if (count%10 == 0)
+            spot3.setColor(color.green);
+            
+            count++;
+    }
+    
 
 
    
