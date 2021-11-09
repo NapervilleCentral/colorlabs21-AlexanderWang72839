@@ -28,12 +28,30 @@ public class TestPicture17
      //Picture apic = new Picture("C:\\Users\\khayes\\Favorites\\Documents\APCS- Java\chap03\Curriclum 2013\Picture Color labs\images\\beach.jpg");
      
      //picture loads all of the pixels into a n array uses a relative path
-     Picture apic = new Picture("images\\beach.jpg");
+     //Picture apic = new Picture("images\\beach.jpg");
      Picture ferris1 = new Picture("images/2000 ferris wheel2.jpg");
      Picture ferris2 = new Picture("images/2000 ferris wheel2.jpg");
      Picture ferris3 = new Picture("images/2000 ferris wheel2.jpg");
      Picture somepic = new Picture("images/robot.jpg");
-
+     Picture katie = new Picture("images/KatieFancy.jpg");
+     
+     katie.explore();
+     Pixel[] katieP;
+     katieP = katie.getPixels();
+     
+     int r, b, g;
+     
+     for (Pixel pixelObj : katieP) {
+         r = pixelObj.getRed();
+         g = pixelObj.getGreen();
+         b = pixelObj.getBlue();
+         
+         if (125 < r && r < 160 && 130 < g && g < 155 && 115 < b && b < 145)
+            pixelObj.setColor(new Color(224, 176, 255));
+     }
+     
+     katie.explore();
+     
      //apic.explore();
      //ferris1.explore();
      //somepic.explore();
@@ -80,6 +98,11 @@ public class TestPicture17
         count++;
     }*/
     
+    
+    
+    
+    
+    
 
 
    
@@ -90,7 +113,7 @@ public class TestPicture17
   * @param none
   * @return none
   */
- /**/
+ /*
     pixels = ferris2.getPixels();
     for (Pixel ferris2 : pixels) {
         ferris2.getRed();
@@ -129,7 +152,17 @@ final double  FACTOR = .5;
   /**/ 
     //write/save a picture as a file
     ferris1.write("images/ferris11.jpg");
+    Picture apic = new Picture("images/bluemark.jpg");
+    Pixel[] markspixs = apic.getPixels();
 
-    /**/
+    /**
+       Method to change  he picture to grayscale
+       Gray is a rgb values of all the same
+       what values would you pic to set all of the rgb
+       */
+      int grayLevel;
+      for (Pixel apix : markspixs) {
+        grayLevel = (int)(0.299 * r + 0.587 * g + 0.114 * b);
+      }  
   }//main
 }//class
