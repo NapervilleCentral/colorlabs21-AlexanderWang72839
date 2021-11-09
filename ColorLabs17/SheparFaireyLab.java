@@ -1,10 +1,11 @@
 
 /**
- * Write a description of class SheparFaireyLab here.
+ * destroys a picture of me
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Alexander Wang
+ * @version 11/9/21
  */
+
 import java.awt.*;
 import java.util.*;
 import java.util.List; // resolves problem with java.awt.List and java.util.List

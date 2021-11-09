@@ -35,8 +35,8 @@ public class TestPicture17
      Picture somepic = new Picture("images/robot.jpg");
 
      //apic.explore();
-     ferris1.explore();
-     somepic.explore();
+     //ferris1.explore();
+     //somepic.explore();
      
      //makes an array of pixels
      Pixel[] pixels;
@@ -55,7 +55,7 @@ public class TestPicture17
     
     spot.setColor(new Color (171, 205, 239));
     System.out.println("spot" + spot);
-    ferris1.explore();
+    //ferris1.explore();
 /*
     pixels[17].setColor(Color.blue);
     spot.setColor(new Color(252,252,252));
@@ -66,12 +66,19 @@ public class TestPicture17
    // loop to access indexes of array or collection
 
     //for each loop spot  is a ?
+    /*int count = 0;
+    int r, g ,b;
     for (Pixel spot3 : pixels) {
-        if (count%10 == 0)
-            spot3.setColor(color.green);
-            
-            count++;
-    }
+        r = spot3.getRed();
+        spot3.setRed(r*2);
+        
+        g = spot3.getGreen();
+        spot3.setGreen(g*5);
+        
+        b = spot3.getBlue();
+        spot3.setBlue(b * (int)Math.random() * 10);
+        count++;
+    }*/
     
 
 
@@ -83,14 +90,13 @@ public class TestPicture17
   * @param none
   * @return none
   */
- /*
-    for (Pixel pixelObj : pixels)
-        {
-            //set the red value of the current pixel to the new value
-           
+ /**/
+    pixels = ferris2.getPixels();
+    for (Pixel ferris2 : pixels) {
+        ferris2.getRed();
 
-        }
-    ferris1.explore();
+    }
+    ferris2.explore();
     
 /**/
  /**
