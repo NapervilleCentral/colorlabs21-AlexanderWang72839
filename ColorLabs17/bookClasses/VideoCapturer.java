@@ -1,3 +1,5 @@
+package bookClasses;
+
 import java.awt.image.BufferedImage;
 import java.awt.Rectangle;
 
