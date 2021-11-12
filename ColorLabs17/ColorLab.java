@@ -10,10 +10,6 @@ import java.util.*;
 import java.util.List;
 
 public class ColorLab {
-    public void maxRed() {
-        
-    }
-    
     public static void main(String[] args) {
         Picture p1 = new Picture("images/femaleLionAndHall.jpg");
         Picture p2 = new Picture("images/femaleLionAndHall.jpg");
