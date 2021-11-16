@@ -1,3 +1,5 @@
+package bookClasses;
+
 /**
  * Class for simple testing
  * 
