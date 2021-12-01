@@ -1,3 +1,5 @@
+package bookClasses;
+
 /**
  * Class that demonstrates search algorithms
  * @author Mark Guzdial

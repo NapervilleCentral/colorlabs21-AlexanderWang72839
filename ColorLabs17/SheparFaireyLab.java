@@ -32,7 +32,6 @@ public class SheparFaireyLab {
             b = pixelObj.getBlue();
             average = (r + g + b)/3;
                 
-                
             if (average < 1 * (255 / 4)) {
                 pixelObj.setColor(new Color(64, 96, 192));
             }
@@ -49,7 +48,6 @@ public class SheparFaireyLab {
                 pixelObj.setColor(new Color(200, 200, 170));
             }
         }
-        p1.explore();
         p1.write("images/SheparFaireyBalenced.jpg");
         
         //method 2
@@ -71,7 +69,7 @@ public class SheparFaireyLab {
             if (average > brightest)
                 brightest = average;
         }
-        System.out.println(dimmest + "  " + brightest);
+        
         for (Pixel pixelObj : picture) {
             r = pixelObj.getRed();
             g = pixelObj.getGreen();
@@ -95,8 +93,6 @@ public class SheparFaireyLab {
             }
             
            }
-        System.out.println(dimmest + ":" + brightest);
-        p2.explore();
         p2.write("images/SheparFaireyIntense.jpg");
         
         //method3
@@ -109,7 +105,6 @@ public class SheparFaireyLab {
             g = pixelObj.getGreen();
             b = pixelObj.getBlue();
             average = (r + g + b)/3;
-                
                 
             if (average < 1 * (255 / 4)) {
                 pixelObj.setColor(new Color(3, 43, 48));
@@ -127,7 +122,6 @@ public class SheparFaireyLab {
                 pixelObj.setColor(new Color(249, 182, 249));
             }
         }
-        p3.explore();
         p3.write("images/SheparFaireyCustomPalette.jpg");
     }
 }

@@ -1,3 +1,5 @@
+package bookClasses;
+
 import java.awt.image.BufferedImage;
 
 /** Interface for working with getting a region of an image
