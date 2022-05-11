@@ -107,7 +107,7 @@ public class PosterIntro {
         
         for (int x = 0 ; x < width ; x++) {
            for (int y = 0 ; y < height ; y++) {
-                t = target.getPixel(x, y);
+                t = target.getPixel(x + xOffset, y + yOffset);
                 s = source.getPixel(x, y);
                 
                 t.setColor(s.getColor());
