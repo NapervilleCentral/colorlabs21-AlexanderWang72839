@@ -12,6 +12,18 @@ import java.util.List;
 
 public class Poster {
     public static void main(String[] args) {
+        Picture pic1 = new Picture("images/Poros&nunu.jpg");
+        
+    }
+    
+    /**
+     * copies the source image to the canvas at a desgination location
+     * @param source image to copy over
+     * @param the blank image to copy to
+     * @param the x location of the canvas to copy to
+     * @param the y location of the canvas to copy to
+     */
+    public static void copyToCanvas(Picture source, Picture canvas, int xOff, int yOff) {
         
     }
     
@@ -27,7 +39,7 @@ public class Poster {
      * Mirrors the image horizontaly along its center
      * @param pic the picture to be modified
      */
-    public static void mirrorHorizontal(Picture pic) {
+    public static void flipHorizontal(Picture pic) {
         
     }
     
@@ -48,14 +60,26 @@ public class Poster {
     }
     
     /**
-     * Blures the image
-     * @param pic  the picture to be modified
+     * Inverts all colors
+     * @param pic the picture to be modified
+     */
+    public static void invertColors(Picture pic) {
+        
+    }
+    
+    /**
+     * recursivly blures the image
+     * @param pic the picture to be modified
      */
     public static void blur(Picture pic) {
         
     }
     
     /**
-     * Fades the picture to white
+     * recursivly fades the picture to white
+     * @param pic  the picture to be modified
      */
+    public static void fadeToWhite() {
+        
+    }
 }
