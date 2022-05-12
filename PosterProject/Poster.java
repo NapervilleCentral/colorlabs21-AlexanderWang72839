@@ -10,7 +10,11 @@ import java.awt.*;
 import java.util.*;
 import java.util.List;
 
+
+
 public class Poster {
+    public enum Direction {upperRight, upperLeft, lowerRight, lowerLeft, all}
+    
     public static void main(String[] args) {
         Picture pic1 = new Picture("images/Poros&nunu.jpg");
         Picture pic2 = new Picture("images/Poros&nunu.jpg");
@@ -22,6 +26,22 @@ public class Poster {
         
         Picture canvas = new Picture();
         
+        final int WIDTH = pic1.getWidth();
+        final int HEIGHT = pic1.getHeight();
+        
+        mirrorVertical(pic1);
+        flipHorizontal(pic2);
+        grayscale(pic3);
+        invertColors(pic4);
+        //fadeToWhite(pic2);
+        
+        pic1.explore();
+        pic2.explore();
+        pic3.explore();
+        pic4.explore();
+        
+        
+        //copyToCanvas(pic, canvas, );
     }
     
     /**
@@ -95,14 +115,6 @@ public class Poster {
     }
     
     /**
-     * Mirrors the image diagnaly along y = x
-     * @param pic the picture to be modified
-     */
-    public static void mirrorDiagnaly(Picture pic) {
-        
-    }
-    
-    /**
      * Grayscales the image
      * @param pic the picture to be modified
      */
@@ -115,7 +127,7 @@ public class Poster {
         int height = pic.getHeight();
         
         for (int x = 0 ; x < width ; x++) {
-            for (int y = 0 ; y < height / 2 ; y++) {
+            for (int y = 0 ; y < height ; y++) {
                 pixel = pic.getPixel(x, y);
                 
                 r = pixel.getColor().getRed();
@@ -142,7 +154,7 @@ public class Poster {
         int height = pic.getHeight();
         
         for (int x = 0 ; x < width ; x++) {
-            for (int y = 0 ; y < height / 2 ; y++) {
+            for (int y = 0 ; y < height ; y++) {
                 pixel = pic.getPixel(x, y);
                 
                 r = pixel.getColor().getRed();
@@ -164,9 +176,42 @@ public class Poster {
     
     /**
      * recursivly fades the picture to white
-     * @param pic  the picture to be modified
+     * @param pic the picture to be modified
+     * @param startX the starting x value of the darkest spot
+     * @param startY the starting y value of the darkest spot
      */
-    public static void fadeToWhite() {
+    public static void fadeToWhite(Picture pic, int startX, int startY) {
+        Pixel up, down, left, right;
         
+        Pixel pixel = pic.getPixel(startX, startY);
+        
+        int width = pic.getWidth();
+        int height = pic.getHeight();
+        
+        int[] distances = new int[] {startX, startY, width - startX, height - startY};
+        
+        //gets largest distance to the edge
+        int distance = distances[1];
+        for (int i : distances) {
+            if (i > distance)
+                distance = i;
+        }
+        
+        fadeToWhite(pic, startX, startY, distance / 255, Direction.all);
+    }
+    
+    /**
+     * recursivly fades the picture to white
+     * @param pic the picture to be modified
+     * @param startX the starting x value of the darkest spot
+     * @param startY the starting y value of the darkest spot
+     */
+    public static void fadeToWhite(Picture pic, int startX, int startY, int intensity, Direction direction) {
+        Pixel pixel, up, down, left, right;
+        
+        int width = pic.getWidth();
+        int height = pic.getHeight();
+        
+        fadeToWhite(pic, startX  1, startY  1, )
     }
 }
