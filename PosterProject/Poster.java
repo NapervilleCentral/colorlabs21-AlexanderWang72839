@@ -10,11 +10,7 @@ import java.awt.*;
 import java.util.*;
 import java.util.List;
 
-
-
 public class Poster {
-    public enum Direction {upperRight, upperLeft, lowerRight, lowerLeft, all}
-    
     public static void main(String[] args) {
         Picture pic1 = new Picture("images/Poros&nunu.jpg");
         Picture pic2 = new Picture("images/Poros&nunu.jpg");
@@ -29,19 +25,17 @@ public class Poster {
         final int WIDTH = pic1.getWidth();
         final int HEIGHT = pic1.getHeight();
         
-        mirrorVertical(pic1);
-        flipHorizontal(pic2);
-        grayscale(pic3);
-        invertColors(pic4);
-        //fadeToWhite(pic2);
+        //mirrorVertical(pic1);
+        //flipHorizontal(pic2);
+        //grayscale(pic3);
+        //invertColors(pic4);
+        fadeToWhite(pic5, WIDTH / 2, HEIGHT / 2);
         
-        pic1.explore();
-        pic2.explore();
-        pic3.explore();
-        pic4.explore();
-        
-        
-        //copyToCanvas(pic, canvas, );
+        //pic1.explore();
+        //pic2.explore();
+        //pic3.explore();
+        //pic4.explore();
+        pic5.explore();        
     }
     
     /**
@@ -197,7 +191,7 @@ public class Poster {
                 distance = i;
         }
         
-        fadeToWhite(pic, startX, startY, distance / 255, Direction.all);
+        fadeToWhite(pic, startX, startY, distance / 255, 0, Direction.all);
     }
     
     /**
@@ -205,13 +199,62 @@ public class Poster {
      * @param pic the picture to be modified
      * @param startX the starting x value of the darkest spot
      * @param startY the starting y value of the darkest spot
+     * @param intensity the speed that colors turn to white
+     * @param count the progress of each color until the color is lightend a bit more
+     * @param Direction the direction that the gradient is going
      */
-    public static void fadeToWhite(Picture pic, int startX, int startY, int intensity, Direction direction) {
-        Pixel pixel, up, down, left, right;
+    public static void fadeToWhite(Picture pic, int startX, int startY, int intensity, int count, Direction direction) {
+        //System.out.println("!");
+        Pixel pixel = pic.getPixel(startX, startY);
+        
+        try {
+            boolean a = pixel.getColor().getRed() < 255;
+        } catch (Exception e) {
+            return;
+        }
         
         int width = pic.getWidth();
         int height = pic.getHeight();
         
-        fadeToWhite(pic, startX  1, startY  1, )
+        if (count >= intensity) {
+            count = 0;
+            if (pixel.getColor().getRed() < 255)
+                pixel.setColor(new Color(pixel.getRed() + 1, pixel.getGreen(), pixel.getBlue()));
+                
+            if (pixel.getColor().getGreen() < 255)
+                pixel.setColor(new Color(pixel.getRed(), pixel.getGreen() + 1, pixel.getBlue()));
+                
+            if (pixel.getColor().getBlue() < 255)
+                pixel.setColor(new Color(pixel.getRed(), pixel.getGreen(), pixel.getBlue() + 1));
+        }    
+        
+        count++;
+        
+        if (direction == Direction.all) {
+            fadeToWhite(pic, startX, startY - 1, intensity, count, Direction.up);
+            fadeToWhite(pic, startX, startY + 1, intensity, count, Direction.down);
+            fadeToWhite(pic, startX - 1, startY, intensity, count, Direction.left);
+            fadeToWhite(pic, startX + 1, startY, intensity, count, Direction.right);
+        }
+        
+        if (direction == Direction.left) {
+            fadeToWhite(pic, startX, startY - 1, intensity, count, Direction.up);
+            fadeToWhite(pic, startX, startY + 1, intensity, count, Direction.down);
+            fadeToWhite(pic, startX - 1, startY, intensity, count, Direction.left);
+        }
+        
+        if (direction == Direction.right) {
+            fadeToWhite(pic, startX, startY - 1, intensity, count, Direction.up);
+            fadeToWhite(pic, startX, startY + 1, intensity, count, Direction.down);
+            fadeToWhite(pic, startX + 1, startY, intensity, count, Direction.right);
+        }
+        
+        if (direction == Direction.up) {
+            fadeToWhite(pic, startX, startY - 1, intensity, count, Direction.up);
+        }
+        
+        if (direction == Direction.down) {
+            fadeToWhite(pic, startX, startY + 1, intensity, count, Direction.down);
+        }
     }
 }
