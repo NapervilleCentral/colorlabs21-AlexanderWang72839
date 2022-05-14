@@ -12,13 +12,17 @@ import java.util.List;
 
 public class Poster {
     public static void main(String[] args) {
-        Picture pic1 = new Picture("images/Poros&nunu.jpg");
-        Picture pic2 = new Picture("images/Poros&nunu.jpg");
-        Picture pic3 = new Picture("images/Poros&nunu.jpg");
-        Picture pic4 = new Picture("images/Poros&nunu.jpg");
-        Picture pic5 = new Picture("images/Poros&nunu.jpg");
-        Picture pic6 = new Picture("images/Poros&nunu.jpg");
-        Picture pic7 = new Picture("images/Poros&nunu.jpg");
+        //String picturePath = "images/Poros&nunu.jpg";
+        //String picturePath = "images/TEEMO.jpeg";
+        String picturePath = "images/BEEMO.jpg";
+        
+        Picture pic1 = new Picture(picturePath);
+        Picture pic2 = new Picture(picturePath);
+        Picture pic3 = new Picture(picturePath);
+        Picture pic4 = new Picture(picturePath);
+        Picture pic5 = new Picture(picturePath);
+        Picture pic6 = new Picture(picturePath);
+        Picture pic7 = new Picture(picturePath);
         
         Picture canvas = new Picture();
         
@@ -191,7 +195,7 @@ public class Poster {
                 distance = i;
         }
         
-        fadeToWhite(pic, startX, startY, distance / 255, 0, Direction.all);
+        fadeToWhite(pic, startX, startY, (int)(distance * 1.5) / 255, 0, 1, Direction.all);
     }
     
     /**
@@ -201,14 +205,14 @@ public class Poster {
      * @param startY the starting y value of the darkest spot
      * @param intensity the speed that colors turn to white
      * @param count the progress of each color until the color is lightend a bit more
+     * @param progress keeps track of the amount to add to each color each time
      * @param Direction the direction that the gradient is going
      */
-    public static void fadeToWhite(Picture pic, int startX, int startY, int intensity, int count, Direction direction) {
-        //System.out.println("!");
+    public static void fadeToWhite(Picture pic, int startX, int startY, int intensity, int count, int progress, Direction direction) {
         Pixel pixel = pic.getPixel(startX, startY);
         
         try {
-            boolean a = pixel.getColor().getRed() < 255;
+            pixel.getColor();
         } catch (Exception e) {
             return;
         }
@@ -216,45 +220,57 @@ public class Poster {
         int width = pic.getWidth();
         int height = pic.getHeight();
         
+        int r = pixel.getColor().getRed();
+        int g = pixel.getColor().getGreen();
+        int b = pixel.getColor().getBlue();
+        
         if (count >= intensity) {
             count = 0;
-            if (pixel.getColor().getRed() < 255)
-                pixel.setColor(new Color(pixel.getRed() + 1, pixel.getGreen(), pixel.getBlue()));
-                
-            if (pixel.getColor().getGreen() < 255)
-                pixel.setColor(new Color(pixel.getRed(), pixel.getGreen() + 1, pixel.getBlue()));
-                
-            if (pixel.getColor().getBlue() < 255)
-                pixel.setColor(new Color(pixel.getRed(), pixel.getGreen(), pixel.getBlue() + 1));
+            progress++;
         }    
+        
+        r += progress;
+        g += progress;
+        b += progress;
+        
+        if (r > 255)
+            r = 255;
+        
+        if (g > 255)
+            g = 255;
+            
+        if (b > 255)
+            b = 255;
+            
+        pixel.setColor(new Color(r, g, b));
         
         count++;
         
         if (direction == Direction.all) {
-            fadeToWhite(pic, startX, startY - 1, intensity, count, Direction.up);
-            fadeToWhite(pic, startX, startY + 1, intensity, count, Direction.down);
-            fadeToWhite(pic, startX - 1, startY, intensity, count, Direction.left);
-            fadeToWhite(pic, startX + 1, startY, intensity, count, Direction.right);
+            fadeToWhite(pic, startX, startY - 1, intensity, count, progress, Direction.up);
+            fadeToWhite(pic, startX, startY + 1, intensity, count, progress, Direction.down);
+            fadeToWhite(pic, startX - 1, startY, intensity, count, progress, Direction.left);
+            fadeToWhite(pic, startX + 1, startY, intensity, count, progress, Direction.right);
         }
         
-        if (direction == Direction.left) {
-            fadeToWhite(pic, startX, startY - 1, intensity, count, Direction.up);
-            fadeToWhite(pic, startX, startY + 1, intensity, count, Direction.down);
-            fadeToWhite(pic, startX - 1, startY, intensity, count, Direction.left);
+        else if (direction == Direction.left) {
+            fadeToWhite(pic, startX, startY - 1, intensity, count, progress, Direction.up);
+            fadeToWhite(pic, startX, startY + 1, intensity, count, progress, Direction.down);
+            fadeToWhite(pic, startX - 1, startY, intensity, count, progress, Direction.left);
         }
         
-        if (direction == Direction.right) {
-            fadeToWhite(pic, startX, startY - 1, intensity, count, Direction.up);
-            fadeToWhite(pic, startX, startY + 1, intensity, count, Direction.down);
-            fadeToWhite(pic, startX + 1, startY, intensity, count, Direction.right);
+        else if (direction == Direction.right) {
+            fadeToWhite(pic, startX, startY - 1, intensity, count, progress, Direction.up);
+            fadeToWhite(pic, startX, startY + 1, intensity, count, progress, Direction.down);
+            fadeToWhite(pic, startX + 1, startY, intensity, count, progress, Direction.right);
         }
         
-        if (direction == Direction.up) {
-            fadeToWhite(pic, startX, startY - 1, intensity, count, Direction.up);
+        else if (direction == Direction.up) {
+            fadeToWhite(pic, startX, startY - 1, intensity, count, progress, Direction.up);
         }
         
-        if (direction == Direction.down) {
-            fadeToWhite(pic, startX, startY + 1, intensity, count, Direction.down);
+        else if (direction == Direction.down) {
+            fadeToWhite(pic, startX, startY + 1, intensity, count, progress, Direction.down);
         }
     }
 }

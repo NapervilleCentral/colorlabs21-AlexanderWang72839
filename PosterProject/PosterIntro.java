@@ -7,7 +7,6 @@
 
 import java.awt.*;
 import java.util.*;
-import java.util.List;
 
 public class PosterIntro {
     public static void main(String[] args) {
