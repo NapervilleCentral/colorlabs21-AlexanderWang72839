@@ -262,7 +262,6 @@ public class Poster {
             if (i > distance)
                 distance = i;
         }
-
         fadeToWhite(pic, startX, startY, (int)(distance * 1.5) / 255, 0, 1, Direction.all);
     }
 
@@ -322,13 +321,11 @@ public class Poster {
             fadeToWhite(pic, startX - 1, startY, intensity, count, progress, Direction.left);
             fadeToWhite(pic, startX + 1, startY, intensity, count, progress, Direction.right);
         }
-
         else if (direction == Direction.left) {
             fadeToWhite(pic, startX, startY - 1, intensity, count, progress, Direction.up);
             fadeToWhite(pic, startX, startY + 1, intensity, count, progress, Direction.down);
             fadeToWhite(pic, startX - 1, startY, intensity, count, progress, Direction.left);
         }
-
         else if (direction == Direction.right) {
             fadeToWhite(pic, startX, startY - 1, intensity, count, progress, Direction.up);
             fadeToWhite(pic, startX, startY + 1, intensity, count, progress, Direction.down);
