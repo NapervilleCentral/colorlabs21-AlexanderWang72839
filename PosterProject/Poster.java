@@ -6,6 +6,8 @@
  */
 
 import java.awt.*;
+import java.util.*;
+import java.util.List;
 
 public class Poster {
     public static void main(String[] args) {
@@ -31,13 +33,13 @@ public class Poster {
 
         final int WIDTH = pic1.getWidth();
         final int HEIGHT = pic1.getHeight();
-
-        mirrorVertical(pic1);
-        flipHorizontal(pic2);
-        grayscale(pic3);
-        invertColors(pic4);
-        fadeToWhite(pic5, WIDTH / 4, HEIGHT / 4);
-
+        
+        //mirrorVertical(pic1);
+        //flipHorizontal(pic2);
+        //grayscale(pic3);
+        //invertColors(pic4);
+        fadeToWhite(pic5, WIDTH / 2, HEIGHT / 2);
+        
         //pic1.explore();
         //pic2.explore();
         //pic3.explore();
