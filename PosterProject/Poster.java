@@ -17,10 +17,10 @@ public class Poster {
         //String canvasPath = "C:\\Users\\Alex Wang\\Documents\\GitHub\\APCSPoster\\src\\images\\LargePosterCanvas.png";
 
         
-        String picturePath = "\\images\\BEEMO.jpg";
+        String picturePath = "images/BEEMO_Downscaled.jpg";
 
-        String canvasPath = "\\images\\PosterCanvas.png";
-        //String canvasPath = "\\images\\LargePosterCanvas.png";
+        String canvasPath = "images/PosterCanvas.png";
+        //String canvasPath = "/images/LargePosterCanvas.png";
 
         Picture pic1 = new Picture(picturePath);
         Picture pic2 = new Picture(picturePath);
@@ -44,7 +44,7 @@ public class Poster {
         //pic2.explore();
         //pic3.explore();
         //pic4.explore();
-        //pic5.explore();
+        pic5.explore();
         
         
         /*
@@ -53,12 +53,12 @@ public class Poster {
          * 1 2 3
          * 4 5 6
          */
-        copyToCanvas(pic1, canvas, 0 * WIDTH + 5, 0 * HEIGHT + 5); //1
-        copyToCanvas(pic2, canvas, 1 * WIDTH + 5, 0 * HEIGHT + 5); //2
-        copyToCanvas(pic3, canvas, 0 * WIDTH + 5, 1 * HEIGHT + 5); //3
-        copyToCanvas(pic4, canvas, 1 * WIDTH + 5, 1 * HEIGHT + 5); //4
-        copyToCanvas(pic5, canvas, 0 * WIDTH + 5, 2 * HEIGHT + 5); //5
-        copyToCanvas(pic6, canvas, 1 * WIDTH + 5, 2 * HEIGHT + 5); //6
+        //copyToCanvas(pic1, canvas, 0 * WIDTH + 5, 0 * HEIGHT + 5); //1
+        //copyToCanvas(pic2, canvas, 1 * WIDTH + 5, 0 * HEIGHT + 5); //2
+        //copyToCanvas(pic3, canvas, 0 * WIDTH + 5, 1 * HEIGHT + 5); //3
+        //copyToCanvas(pic4, canvas, 1 * WIDTH + 5, 1 * HEIGHT + 5); //4
+        //copyToCanvas(pic5, canvas, 0 * WIDTH + 5, 2 * HEIGHT + 5); //5
+        //copyToCanvas(pic6, canvas, 1 * WIDTH + 5, 2 * HEIGHT + 5); //6
 
         canvas.write(canvasPath);
     }
@@ -145,7 +145,7 @@ public class Poster {
     public static void grayscale(Picture pic) {
         Pixel pixel;
 
-        int r, g, b, average;
+        int r, g, b, gray;
 
         int width = pic.getWidth();
         int height = pic.getHeight();
@@ -158,9 +158,9 @@ public class Poster {
                 g = pixel.getColor().getGreen();
                 b = pixel.getColor().getBlue();
 
-                average = (r + g + b) / 3;
+                gray = 0.299 * r + 0.587 * g + 0.114 * b;
 
-                pixel.setColor(new Color(average, average, average));
+                pixel.setColor(new Color(gray, gray, gray));
             }
         }
     }
@@ -192,50 +192,13 @@ public class Poster {
     }
 
     /**
-     * recursively blurs the image
+     * blends the image with another
      * 
-     * @param pic the picture to be modified
+     * @param pic1 the picture to be blended
+     * @param pic2 the picture to be blended
      */
-    public static void blur(Picture pic, int x, int y) {
-        /*
-         * Pixel layout
-         * 
-         * 1  2  3
-         * 4 pix 5
-         * 6  7  8
-         */
-        Pixel pixel;
-        Pixel one, two, three, four, five, six, seven, eight;
-        
-        int width = pic.getWidth();
-        int height = pic.getHeight();
-        int r, g, b;
-        
-        //base case
-        if (y >= height)
-            return;
-            
-        if (x >= width) {
-            blur(pic, 0, y + 1);
-        }
-        
-        pixel = pic.getPixel(x, y);
-        one = pic.getPixel(x - 1, y - 1);
-        two = pic.getPixel(x, y - 1);
-        three = pic.getPixel(x + 1, y - 1);
-        four = pic.getPixel(x - 1, y);
-        five = pic.getPixel(x + 1, y);
-        six = pic.getPixel(x - 1, y + 1);
-        seven = pic.getPixel(x, y + 1);
-        eight = pic.getPixel(x + 1, y + 1);
-        
-        blur(pic, x + 1, y);
-        
-        r = (pixel.getRed() + one.getRed() + two.getRed() + three.getRed() + four.getRed() + five.getRed() + six.getRed() + seven.getRed() + eight.getRed()) / 9;
-        g = (pixel.getGreen() + one.getGreen() + two.getGreen() + three.getGreen() + four.getGreen() + five.getGreen() + six.getGreen() + seven.getGreen() + eight.getGreen()) / 9;
-        b = (pixel.getBlue() + one.getBlue() + two.getBlue() + three.getBlue() + four.getBlue() + five.getBlue() + six.getBlue() + seven.getBlue() + eight.getBlue()) / 9;
-        
-        pixel.setColor(new Color(r, g, b));
+    public static void blend(Picture pic1, Picture pic2) {
+        //todo stuff :D
     }
 
     /**
