@@ -198,7 +198,32 @@ public class Poster {
      * @param pic2 the picture to be blended
      */
     public static void blend(Picture pic1, Picture pic2) {
-        //todo stuff :D
+        Pixel pixel1, pixel2;
+
+        int r, g, b;
+
+        int width = pic1.getWidth();
+        int height = pic1.getHeight();
+        int width2 = pic2.getWidth();
+        int height2 = pic2.getHeight();
+        
+        if (width != width2 || height != height2) {
+            System.out.println("Picture resolutions are not the same");
+            return;
+        }
+        
+        for (int x = 0 ; x < width ; x++) {
+            for (int y = 0 ; y < height ; y++) {
+                pixel1 = pic1.getPixel(x, y);
+                pixel2 = pic2.getPixel(x, y);
+
+                r = pixel1.getColor().getRed();
+                g = pixel1.getColor().getGreen();
+                b = pixel1.getColor().getBlue();
+
+                pixel.setColor(new Color(//todo help hlelp));
+            }
+        }
     }
 
     /**
