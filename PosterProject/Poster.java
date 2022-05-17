@@ -157,8 +157,8 @@ public class Poster {
                 r = pixel.getColor().getRed();
                 g = pixel.getColor().getGreen();
                 b = pixel.getColor().getBlue();
-
-                gray = 0.299 * r + 0.587 * g + 0.114 * b;
+                
+                gray = (int)(0.299 * r + 0.587 * g + 0.114 * b);
 
                 pixel.setColor(new Color(gray, gray, gray));
             }
