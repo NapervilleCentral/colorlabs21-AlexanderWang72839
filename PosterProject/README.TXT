@@ -5,11 +5,11 @@ all he/she needs to know. The comments should usually include at least:
 ------------------------------------------------------------------------
 
 PROJECT TITLE: Poster Project
-PURPOSE OF PROJECT: To make cool poster and to lag out computers
+PURPOSE OF PROJECT: To make cool posters and to lag out computers
 VERSION or DATE: 5/16/22
-HOW TO START THIS PROJECT:
 AUTHORS: Alexander Wang
-USER INSTRUCTIONS: Run this command in the folder of jar (without quotes): "java -Xss10m -jar PosterProject.jar"
+USER INSTRUCTIONS: If you decide(not recomended) Run this command in the folder of jar (without quotes): 
+"java -Xss10m -jar PosterProject.jar"
 
 
 The poster is composed of 144 images, in an array of 9 by 16. Each image is given a random amount of random effects. 

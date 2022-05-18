@@ -1,4 +1,4 @@
-/**
+ /**
  * Makes Poster project
  *
  * @author Alexander Wang
@@ -217,11 +217,11 @@ public class Poster {
                 pixel1 = pic1.getPixel(x, y);
                 pixel2 = pic2.getPixel(x, y);
 
-                r = pixel1.getColor().getRed();
-                g = pixel1.getColor().getGreen();
-                b = pixel1.getColor().getBlue();
+                r = (pixel1.getColor().getRed() + pixel2.getColor().getRed()) / 2;
+                g = (pixel1.getColor().getGreen() + pixel2.getColor().getGreen()) / 2;
+                b = (pixel1.getColor().getBlue() + pixel2.getColor().getBlue()) / 2;
 
-                pixel.setColor(new Color(//todo help hlelp));
+                pixel1.setColor(new Color(r, g, b));
             }
         }
     }
