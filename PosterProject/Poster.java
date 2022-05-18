@@ -18,9 +18,9 @@ public class Poster {
 
         
         String picturePath = "images/BEEMO_Downscaled.jpg";
-
+        String otherPicturePath = "images/SBTEEMO_Downscaled.jpg";
+        
         String canvasPath = "images/PosterCanvas.png";
-        //String canvasPath = "/images/LargePosterCanvas.png";
 
         Picture pic1 = new Picture(picturePath);
         Picture pic2 = new Picture(picturePath);
@@ -28,6 +28,8 @@ public class Poster {
         Picture pic4 = new Picture(picturePath);
         Picture pic5 = new Picture(picturePath);
         Picture pic6 = new Picture(picturePath);
+        
+        Picture otherPic = new Picture(otherPicturePath);
 
         Picture canvas = new Picture(canvasPath);
 
@@ -38,13 +40,15 @@ public class Poster {
         //flipHorizontal(pic2);
         //grayscale(pic3);
         //invertColors(pic4);
-        fadeToWhite(pic5, WIDTH / 2, HEIGHT / 2);
+        //fadeToWhite(pic5, WIDTH / 2, HEIGHT / 2);
+        blend(pic6, otherPic);
         
         //pic1.explore();
         //pic2.explore();
         //pic3.explore();
         //pic4.explore();
-        pic5.explore();
+        //pic5.explore();
+        pic6.explore();
         
         
         /*
