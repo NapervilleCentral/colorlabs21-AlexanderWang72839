@@ -156,6 +156,7 @@ image 142: fadeToWhite, mirror, grayscale
 image 143: invertColors, grayscale, mirror
 image 144: flip, grayscale, blend
 
+Operation explinations
 
 The poster is composed of 144 images, in an array of 9 by 16. Each image is given a random amount of random effects. 
 There are a total of 10 effects, though only 6 can be applied. This is because the mirror has 4 variations and the 
