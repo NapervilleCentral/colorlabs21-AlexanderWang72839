@@ -1,0 +1,1 @@
+java -Xss10m -Xmx16G -jar Posterjar.jar

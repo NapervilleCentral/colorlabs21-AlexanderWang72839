@@ -1,4 +1,4 @@
- /**
+/**
  * Makes Poster project
  *
  * @author Alexander Wang
@@ -6,71 +6,158 @@
  */
 
 import java.awt.*;
-import java.util.*;
-import java.util.List;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Poster {
-    public static void main(String[] args) {
-        //String picturePath = "C:\\Users\\Alex Wang\\Documents\\GitHub\\APCSPoster\\src\\images\\BEEMO.jpg";
+    public static void main(String[] args) throws IOException {
+        System.out.println("Program started");
 
-        //String canvasPath = "C:\\Users\\Alex Wang\\Documents\\GitHub\\APCSPoster\\src\\images\\PosterCanvas.png";
-        //String canvasPath = "C:\\Users\\Alex Wang\\Documents\\GitHub\\APCSPoster\\src\\images\\LargePosterCanvas.png";
+        final int NUM_OF_PICS = 144;
 
-        
-        String picturePath = "images/BEEMO_Downscaled.jpg";
-        String otherPicturePath = "images/SBTEEMO_Downscaled.jpg";
-        
-        String canvasPath = "images/PosterCanvas.png";
+        /**/
+        String picturePath1 = "C:\\Users\\Alex Wang\\Documents\\GitHub\\APCSPoster\\src\\images\\BEEMO.jpg";
+        String picturePath2 = "C:\\Users\\Alex Wang\\Documents\\GitHub\\APCSPoster\\src\\images\\SBTEEMO.jpg";
+        String canvasPath = "C:\\Users\\Alex Wang\\Documents\\GitHub\\APCSPoster\\src/images/TEEMOx144.jpg";
 
-        Picture pic1 = new Picture(picturePath);
-        Picture pic2 = new Picture(picturePath);
-        Picture pic3 = new Picture(picturePath);
-        Picture pic4 = new Picture(picturePath);
-        Picture pic5 = new Picture(picturePath);
-        Picture pic6 = new Picture(picturePath);
-        
-        Picture otherPic = new Picture(otherPicturePath);
+        Picture picture2 = new Picture(picturePath2);
+        Picture canvas = new Picture(46314, 46320);
 
-        Picture canvas = new Picture(canvasPath);
+        Picture[] pictures = new Picture[NUM_OF_PICS];
 
-        final int WIDTH = pic1.getWidth();
-        final int HEIGHT = pic1.getHeight();
-        
-        //mirrorVertical(pic1);
-        //flipHorizontal(pic2);
-        //grayscale(pic3);
-        //invertColors(pic4);
-        //fadeToWhite(pic5, WIDTH / 2, HEIGHT / 2);
-        blend(pic6, otherPic);
-        
-        //pic1.explore();
-        //pic2.explore();
-        //pic3.explore();
-        //pic4.explore();
-        //pic5.explore();
-        pic6.explore();
-        
-        
-        /*
-         * layout of poster
-         * 
-         * 1 2 3
-         * 4 5 6
-         */
-        //copyToCanvas(pic1, canvas, 0 * WIDTH + 5, 0 * HEIGHT + 5); //1
-        //copyToCanvas(pic2, canvas, 1 * WIDTH + 5, 0 * HEIGHT + 5); //2
-        //copyToCanvas(pic3, canvas, 0 * WIDTH + 5, 1 * HEIGHT + 5); //3
-        //copyToCanvas(pic4, canvas, 1 * WIDTH + 5, 1 * HEIGHT + 5); //4
-        //copyToCanvas(pic5, canvas, 0 * WIDTH + 5, 2 * HEIGHT + 5); //5
-        //copyToCanvas(pic6, canvas, 1 * WIDTH + 5, 2 * HEIGHT + 5); //6
+        ArrayList remainingOperations = new ArrayList();
+
+        Operation operation = null;
+
+        int numOfEffects, index;
+
+        //assigning picture paths
+        for (int i = 0 ; i < pictures.length ; i++)
+            pictures[i] = new Picture(picturePath1);
 
         canvas.write(canvasPath);
+
+        System.out.println("Finished setup");
+
+        /**/
+
+        //applying a random amount of random operations to each picture
+        for (int i = 0 ; i < NUM_OF_PICS ; i++) {
+            ArrayList operationsDone = new ArrayList();
+            remainingOperations = new ArrayList(Arrays.asList(Operation.mirror, Operation.flip, Operation.grayscale, Operation.invertColors, Operation.blur, Operation.fadeToWhite));
+            numOfEffects = (int)(Math.random() * 6);
+            for (int j = 0 ; j < numOfEffects ; j++) {
+                index = (int)(Math.random() * remainingOperations.size());
+                operation = (Operation) remainingOperations.remove(index);
+                operationsDone.add(operation);
+
+                if (operation == Operation.mirror)
+                    mirror(pictures[j]);
+
+                else if (operation == Operation.flip)
+                    flip(pictures[j]);
+
+                else if (operation == Operation.grayscale)
+                    grayscale(pictures[j]);
+
+                else if (operation == Operation.invertColors)
+                    invertColors(pictures[j]);
+
+                else if (operation == Operation.blur)
+                    blend(pictures[j], picture2);
+
+                else if (operation == Operation.fadeToWhite)
+                    fadeToWhite(pictures[j], (int)(Math.random() * pictures[j].getWidth() - 1), (int)(pictures[j].getHeight() - 1));
+            }
+            System.out.println("image " + i + " has finished processing; added effect(s): " + operationsDone);
+        }
+
+        //writing all pictures to canvas
+        //16x9
+        for (int i = 0 ; i < NUM_OF_PICS ; i++) {
+            copyToCanvas(pictures[i], canvas, pictures[i].getWidth() * (i % 9), pictures[i].getHeight() *  (i / 9));
+            System.out.println(i + " finished copying image " + i + " (" + i % 9 + ", " + (i / 9) + ")");
+        }
+
+        System.out.println("Finished processing; writing image to file");
+
+        canvas.write(canvasPath);
+
+        /*
+
+        int i = 0;
+        mirrorVerticalLeft(pictures[++i]);
+        pictures[i].explore();
+        mirrorVerticalRight(pictures[++i]);
+        pictures[i].explore();
+        mirrorHorizontalUp(pictures[++i]);
+        pictures[i].explore();
+        mirrorHorizontalDown(pictures[++i]);
+        pictures[i].explore();
+
+        flipHorizontal(pictures[++i]);
+        pictures[i].explore();
+        flipVertical(pictures[++i]);
+        pictures[i].explore();
+
+        grayscale(pictures[++i]);
+        pictures[i].explore();
+        invertColors(pictures[++i]);
+        pictures[i].explore();
+
+        blend(pictures[++i], picture2);
+        pictures[i].explore();
+
+        fadeToWhite(pictures[++i], (int)(pictures[i].getWidth() / 2), (int)(pictures[i].getHeight() / 2));
+        pictures[i].explore();
+
+        /*
+
+        //exploring each picture
+        for (Picture pic : pictures)
+            pic.explore();
+
+         /**/
+        System.out.println("Finished");
     }
 
     /**
-     * copies the source image to 
-     * the canvas at a designation location
-     * 
+     * randomly selects a mirror function and executes it on the given picture
+     *
+     * @param pic the picture to be modified
+     */
+    public static void mirror(Picture pic) {
+        switch ((int)(Math.random() * 4) + 1) {
+            case 1:
+                mirrorVerticalLeft(pic);
+                break;
+            case 2:
+                mirrorVerticalRight(pic);
+                break;
+            case 3:
+                mirrorHorizontalUp(pic);
+                break;
+            case 4:
+                mirrorHorizontalDown(pic);
+                break;
+        }
+    }
+
+    /**
+     * randomly selects a flip function and executes it on the given picture
+     *
+     * @param pic the picture to be modified
+     */
+    public static void flip(Picture pic) {
+        if ((int)(Math.random() * 1) == 0)
+            flipHorizontal(pic);
+        else
+            flipVertical(pic);
+    }
+
+    /**
+     * copies the source image to the canvas at a designation location
      * @param source image to copy over
      * @param canvas the blank image to copy to
      * @param xOff the x location of the canvas to copy to
@@ -94,18 +181,17 @@ public class Poster {
     }
 
     /**
-     * Mirrors the image verticaly along its center
-     * 
+     * Mirrors the image vertically to the right along its center
      * @param pic the picture to be modified
      */
-    public static void mirrorVertical(Picture pic) {
+    public static void mirrorVerticalRight(Picture pic) {
         Pixel leftPixel;
         Pixel rightPixel;
 
         int height = pic.getHeight();
         int width = pic.getWidth();
 
-        for (int x = 0 ; x <= width / 2 ; x++) {
+        for (int x = 0 ; x < width / 2 ; x++) {
             for (int y = 0 ; y < height ; y++) {
                 leftPixel = pic.getPixel(x, y);
                 rightPixel = pic.getPixel(width - x - 1, y);
@@ -116,8 +202,70 @@ public class Poster {
     }
 
     /**
-     * Flips the image horizontaly along its center
-     * 
+     * Mirrors the image vertically to the left along its center
+     * @param pic the picture to be modified
+     */
+    public static void mirrorVerticalLeft(Picture pic) {
+        Pixel leftPixel;
+        Pixel rightPixel;
+
+        int height = pic.getHeight();
+        int width = pic.getWidth();
+
+        for (int x = width / 2 ; x < width ; x++) {
+            for (int y = 0 ; y < height ; y++) {
+                leftPixel = pic.getPixel(x, y);
+                rightPixel = pic.getPixel(width - x - 1, y);
+
+                rightPixel.setColor(leftPixel.getColor());
+            }
+        }
+    }
+
+    /**
+     * Mirrors the image horizontal, top to down along its center
+     * @param pic the picture to be modified
+     */
+    public static void mirrorHorizontalDown(Picture pic) {
+        Pixel leftPixel;
+        Pixel rightPixel;
+
+        int height = pic.getHeight();
+        int width = pic.getWidth();
+
+        for (int x = 0 ; x < width ; x++) {
+            for (int y = 0 ; y < height / 2; y++) {
+                leftPixel = pic.getPixel(x, y);
+                rightPixel = pic.getPixel(x, height - y - 1);
+
+                rightPixel.setColor(leftPixel.getColor());
+            }
+        }
+    }
+
+    /**
+     * Mirrors the image horizontally top to down along its center
+     * @param pic the picture to be modified
+     */
+    public static void mirrorHorizontalUp(Picture pic) {
+        Pixel leftPixel;
+        Pixel rightPixel;
+
+        int height = pic.getHeight();
+        int width = pic.getWidth();
+
+        for (int x = 0 ; x < width ; x++) {
+            for (int y = height / 2 ; y < height ; y++) {
+                leftPixel = pic.getPixel(x, y);
+                rightPixel = pic.getPixel(x, height - y - 1);
+
+                rightPixel.setColor(leftPixel.getColor());
+            }
+        }
+    }
+
+    /**
+     * Flips the image up to down along its center
      * @param pic the picture to be modified
      */
     public static void flipHorizontal(Picture pic) {
@@ -142,14 +290,38 @@ public class Poster {
     }
 
     /**
+     * Flips the image left to right along its center
+     * @param pic the picture to be modified
+     */
+    public static void flipVertical(Picture pic) {
+        Pixel top;
+        Pixel bot;
+
+        Color temp = new Color(0, 0, 0);
+
+        int width = pic.getWidth();
+        int height = pic.getHeight();
+
+        for (int x = 0 ; x < width / 2; x++) {
+            for (int y = 0 ; y < height ; y++) {
+                top = pic.getPixel(x, y);
+                bot = pic.getPixel(width - x - 1, y);
+
+                temp = top.getColor();
+                top.setColor(bot.getColor());
+                bot.setColor(temp);
+            }
+        }
+    }
+
+    /**
      * Grayscales the image
-     * 
      * @param pic the picture to be modified
      */
     public static void grayscale(Picture pic) {
         Pixel pixel;
 
-        int r, g, b, gray;
+        int r, g, b, average;
 
         int width = pic.getWidth();
         int height = pic.getHeight();
@@ -161,17 +333,16 @@ public class Poster {
                 r = pixel.getColor().getRed();
                 g = pixel.getColor().getGreen();
                 b = pixel.getColor().getBlue();
-                
-                gray = (int)(0.299 * r + 0.587 * g + 0.114 * b);
 
-                pixel.setColor(new Color(gray, gray, gray));
+                average = (r + g + b) / 3;
+
+                pixel.setColor(new Color(average, average, average));
             }
         }
     }
 
     /**
      * Inverts all colors
-     * 
      * @param pic the picture to be modified
      */
     public static void invertColors(Picture pic) {
@@ -197,7 +368,7 @@ public class Poster {
 
     /**
      * blends the image with another
-     * 
+     *
      * @param pic1 the picture to be blended
      * @param pic2 the picture to be blended
      */
@@ -210,12 +381,12 @@ public class Poster {
         int height = pic1.getHeight();
         int width2 = pic2.getWidth();
         int height2 = pic2.getHeight();
-        
+
         if (width != width2 || height != height2) {
             System.out.println("Picture resolutions are not the same");
             return;
         }
-        
+
         for (int x = 0 ; x < width ; x++) {
             for (int y = 0 ; y < height ; y++) {
                 pixel1 = pic1.getPixel(x, y);
@@ -231,9 +402,7 @@ public class Poster {
     }
 
     /**
-     * sets up and calls the recursive function that fades 
-     * the picture to white from startX and startY
-     * 
+     * recursively fades the picture to white
      * @param pic the picture to be modified
      * @param startX the starting x value of the darkest spot
      * @param startY the starting y value of the darkest spot
@@ -248,18 +417,18 @@ public class Poster {
 
         int[] distances = new int[] {startX, startY, width - startX, height - startY};
 
-        //gets largest distance to the edge
+        //gets the largest distance to the edge
         int distance = distances[1];
         for (int i : distances) {
             if (i > distance)
                 distance = i;
         }
+
         fadeToWhite(pic, startX, startY, (int)(distance * 1.5) / 255, 0, 1, Direction.all);
     }
 
     /**
      * recursivly fades the picture to white
-     * 
      * @param pic the picture to be modified
      * @param startX the starting x value of the darkest spot
      * @param startY the starting y value of the darkest spot
@@ -270,16 +439,15 @@ public class Poster {
      */
     public static void fadeToWhite(Picture pic, int startX, int startY, int intensity, int count, int progress, Direction direction) {
         Pixel pixel = pic.getPixel(startX, startY);
-        
-        int width = pic.getWidth();
-        int height = pic.getHeight();
-        
-        //base case
+
         try {
             pixel.getColor();
         } catch (Exception e) {
             return;
         }
+
+        int width = pic.getWidth();
+        int height = pic.getHeight();
 
         int r = pixel.getColor().getRed();
         int g = pixel.getColor().getGreen();
@@ -313,11 +481,13 @@ public class Poster {
             fadeToWhite(pic, startX - 1, startY, intensity, count, progress, Direction.left);
             fadeToWhite(pic, startX + 1, startY, intensity, count, progress, Direction.right);
         }
+
         else if (direction == Direction.left) {
             fadeToWhite(pic, startX, startY - 1, intensity, count, progress, Direction.up);
             fadeToWhite(pic, startX, startY + 1, intensity, count, progress, Direction.down);
             fadeToWhite(pic, startX - 1, startY, intensity, count, progress, Direction.left);
         }
+
         else if (direction == Direction.right) {
             fadeToWhite(pic, startX, startY - 1, intensity, count, progress, Direction.up);
             fadeToWhite(pic, startX, startY + 1, intensity, count, progress, Direction.down);
