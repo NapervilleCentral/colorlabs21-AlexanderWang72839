@@ -1,9 +1,13 @@
 <component name="libraryTable">
   <library name="mediaComp">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/+libs/mediaComp.jar!/" />
+      <root url="file://$PROJECT_DIR$/+libs" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/+libs" />
+    </SOURCES>
+    <jarDirectory url="file://$PROJECT_DIR$/+libs" recursive="false" />
+    <jarDirectory url="file://$PROJECT_DIR$/+libs" recursive="false" type="SOURCES" />
   </library>
 </component>

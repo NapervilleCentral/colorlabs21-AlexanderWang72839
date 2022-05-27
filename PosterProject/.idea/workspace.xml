@@ -2,12 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9ce75359-c7d4-4223-99f5-9236ae75a9bb" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/mediaComp.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/mediaComp.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Poster.class" beforeDir="false" afterPath="$PROJECT_DIR$/Poster.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Poster.ctxt" beforeDir="false" afterPath="$PROJECT_DIR$/Poster.ctxt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Poster.java" beforeDir="false" afterPath="$PROJECT_DIR$/Poster.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PosterIntro.java" beforeDir="false" afterPath="$PROJECT_DIR$/PosterIntro.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,7 +26,10 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/+libs" />
+    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="configurable.group.editor" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -43,6 +42,8 @@
       <updated>1652380562867</updated>
       <workItem from="1652390341089" duration="86000" />
       <workItem from="1652398284352" duration="82000" />
+      <workItem from="1652921437122" duration="4279000" />
+      <workItem from="1652936608536" duration="48000" />
     </task>
     <servers />
   </component>
